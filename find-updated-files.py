@@ -1,6 +1,7 @@
 #! /bin/python
 import os
 import time
+import unicodedata
 
 
 def searchFiles(rootDirectory, modifyDateLimit, excludedFiles):
@@ -60,9 +61,9 @@ def searchFiles(rootDirectory, modifyDateLimit, excludedFiles):
 
         if fileFound:
             print(
-                dirPath,
+                unicodedata.normalize("NFC", dirPath),
                 " ",
-                foundFilePath,
+                unicodedata.normalize("NFC", foundFilePath),
                 " ",
                 time.strftime("%m/%d/%Y", foundFileModifiedDate),
             )
@@ -70,23 +71,27 @@ def searchFiles(rootDirectory, modifyDateLimit, excludedFiles):
             with open(outputFile, "a") as f:
                 f.write(
                     '"'
-                    + dirPath
+                    + unicodedata.normalize("NFC", dirPath)
                     + '","'
                     + time.strftime("%m/%d/%Y", foundFileModifiedDate)
                     + '","'
-                    + foundFilePath
+                    + unicodedata.normalize("NFC", foundFilePath)
                     + '"\n'
                 )
 
         else:
             print(
-                dirPath,
+                unicodedata.normalize("NFC", dirPath),
                 " - no modification found after ",
                 time.strftime("%m/%d/%Y", modifyDateLimit),
             )
 
             with open(outputFile, "a", encoding="utf8") as f:
-                f.write('"' + dirPath + '","No modification found",\n')
+                f.write(
+                    '"'
+                    + unicodedata.normalize("NFC", dirPath)
+                    + '","No modification found",\n'
+                )
 
 
 dateLimit = "01/01/2016"
