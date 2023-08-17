@@ -85,7 +85,7 @@ def searchFiles(rootDirectory, modifyDateLimit, excludedFiles):
                 time.strftime("%m/%d/%Y", modifyDateLimit),
             )
 
-            with open(outputFile, "a") as f:
+            with open(outputFile, "a", encoding="utf8") as f:
                 f.write('"' + dirPath + '","No modification found",\n')
 
 
@@ -108,7 +108,7 @@ outputFile = input("Input output file name:\n")
 
 
 # write header to output file
-with open(outputFile, "w") as f:
+with open(outputFile, "w", encoding="utf8") as f:
     f.write("Folder Name,Last Modified,File\n")
 
 try:
