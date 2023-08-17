@@ -3,6 +3,8 @@ import os
 import time
 import unicodedata
 
+# Modified 5:07PM
+
 
 def searchFiles(rootDirectory, modifyDateLimit, excludedFiles):
     # iterate through all top level folders seperately
